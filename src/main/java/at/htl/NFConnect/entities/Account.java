@@ -1,7 +1,8 @@
-package at.htl.NFConnect;
+package at.htl.nfconnect.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Entity
 @XmlRootElement
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"email"}))
 @NamedQueries({
         @NamedQuery(
                 name = "findAccountByEmail",
@@ -40,7 +42,9 @@ public class Account implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotNull
+    @NotNull(message = "Email muss angegeben werden!")
+    @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
     private String email;
     @NotNull
     private String password;
@@ -50,7 +54,7 @@ public class Account implements Serializable{
     private String lastName;
     private String phone1;
     private String phone2;
-    private String adress;
+    private String street;
     private String city;
     private String state;
     private String company;

@@ -1,4 +1,6 @@
-package at.htl.NFConnect;
+package at.htl.nfconnect.rest;
+
+import at.htl.nfconnect.entities.Account;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
