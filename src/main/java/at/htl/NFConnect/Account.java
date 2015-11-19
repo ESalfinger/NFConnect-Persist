@@ -1,6 +1,7 @@
 package at.htl.NFConnect;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -39,9 +40,13 @@ public class Account implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotNull
     private String email;
+    @NotNull
     private String password;
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
     private String phone1;
     private String phone2;
@@ -175,4 +180,10 @@ public class Account implements Serializable{
         this.title = title;
     }
     //endregion
+
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
+    }
 }
