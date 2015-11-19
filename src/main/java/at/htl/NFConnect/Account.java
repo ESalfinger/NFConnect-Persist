@@ -12,7 +12,7 @@ import java.util.List;
 
 @Entity
 @XmlRootElement
-@NamedQueries(
+@NamedQueries({
         @NamedQuery(
                 name = "findAccountByEmail",
                 query = "select a from Account a " +
@@ -33,7 +33,7 @@ import java.util.List;
                 query = "select a from Account a " +
                         "where a.firstName = :FIRSTNAME and a.lastName = :LASTNAME"
         )
-)
+})
 public class Account implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
