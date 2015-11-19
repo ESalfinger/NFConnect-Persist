@@ -52,7 +52,15 @@ public class Account implements Serializable{
     private String title;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "AccountRef")
+    @JoinTable(
+            name="ACCOUNT_REF"
+            , joinColumns={
+            @JoinColumn(name="ACCOUNT_ID")
+    }
+            , inverseJoinColumns={
+            @JoinColumn(name="CONTACTS_ID")
+    }
+    )
     private List<Account> contacts = new LinkedList<Account>();
 
     public Account() {
