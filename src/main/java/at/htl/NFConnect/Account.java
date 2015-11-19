@@ -52,6 +52,7 @@ public class Account implements Serializable{
     private String title;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "AccountRef")
     private List<Account> contacts = new LinkedList<Account>();
 
     public Account() {
