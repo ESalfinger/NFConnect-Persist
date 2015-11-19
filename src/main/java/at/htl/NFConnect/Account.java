@@ -1,6 +1,7 @@
 package at.htl.NFConnect;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,7 +9,31 @@ import java.util.List;
 /**
  * Created by SaliBabba on 29/10/15.
  */
+
 @Entity
+@XmlRootElement
+@NamedQueries(
+        @NamedQuery(
+                name = "findAccountByEmail",
+                query = "select a from Account a " +
+                        "where a.email = :EMAIL"
+        ),
+        @NamedQuery(
+                name = "findAccountByFirstName",
+                query = "select a from Account a " +
+                        "where a.firstName = :FIRSTNAME"
+        ),
+        @NamedQuery(
+                name = "findAccountByLastName",
+                query = "select a from Account a " +
+                        "where a.lastName = :LASTNAME"
+        ),
+        @NamedQuery(
+                name = "findAccountByFullName",
+                query = "select a from Account a " +
+                        "where a.firstName = :FIRSTNAME and a.lastName = :LASTNAME"
+        )
+)
 public class Account implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
