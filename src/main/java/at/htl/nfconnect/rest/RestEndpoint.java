@@ -44,6 +44,6 @@ public class RestEndpoint {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response update(JsonObject accountData) {
-        return Response.ok().build();
+        return this.facade.update(accountData);
     }
 }
