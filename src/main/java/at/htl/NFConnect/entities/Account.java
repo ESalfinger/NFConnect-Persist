@@ -2,14 +2,10 @@ package at.htl.nfconnect.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import javax.xml.bind.DataBindingException;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,10 +15,10 @@ import java.util.List;
 
 @Entity
 @XmlRootElement
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"email"}))
+//@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"email"}))
 @NamedQueries({
         @NamedQuery(
-                name = "findAll",
+                name = "findAllAccounts",
                 query = "select a from Account a"
         ),
         @NamedQuery(
@@ -78,55 +74,32 @@ public class Account implements Serializable{
     @Size(max = 32, message = "LastName can only be 32 characters long!")
     private String lastName;
     //---------------
-    @Pattern(regexp = "^$|[0-9/]*", message = "Phonenumber has to be in this format ('0123/12345')!")
-    @Size(max = 16, message = "Phonenumber can only be 16 characters long!")
-    private String phone1;
-    //---------------
-    @Pattern(regexp = "^$|[0-9/]*", message = "Phonenumber has to be in this format ('0123/12345')!")
-    @Size(max = 16, message = "Phonenumber can only be 16 characters long!")
-    private String phone2;
-    //---------------
-    @Temporal(javax.persistence.TemporalType.DATE)
-    @Past(message = "Date of birth has ti be in the past!")
-    private LocalDate gebDat;
-    //---------------
-    private String street;
-    //---------------
-    private String city;
-    //---------------
-    private String state;
-    //---------------
-    private String company;
-    //---------------
-    private String title;
-    //---------------
-
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name="ACCOUNT_REF"
+            name="ACCOUNT_SHAREDCARDS"
             , joinColumns={
             @JoinColumn(name="ACCOUNT_ID")
     }
             , inverseJoinColumns={
-            @JoinColumn(name="CONTACTS_ID")
+            @JoinColumn(name="CARD_ID")
     }
     )
-    private List<Account> contacts;
+    private List<Card> sharedCards;
+    //---------------
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="ACCOUNT_MYCARDS"
+            , joinColumns={
+            @JoinColumn(name="ACCOUNT_ID")
+    }
+            , inverseJoinColumns={
+            @JoinColumn(name="CARD_ID")
+    }
+    )
+    private List<Card> myCards;
 
     public Account() {
-        this.email = "";
-        this.password = "";
-        this.firstName = "";
-        this.lastName = "";
-        this.phone1 = "";
-        this.phone2 = "";
-        this.gebDat = null;
-        this.street = "";
-        this.city = "";
-        this.state = "";
-        this.company = "";
-        this.title = "";
-        this.contacts = new LinkedList<Account>();
+        this("", "", "", "");
     }
 
     public Account(String email, String password, String firstName, String lastName) {
@@ -134,11 +107,14 @@ public class Account implements Serializable{
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.sharedCards = new LinkedList<Card>();
+        this.myCards = new LinkedList<Card>();
+        myCards.add(new Card(firstName, lastName));
     }
 
-    public void AddContact(Account contact){
-        if(contact != null && !contacts.contains(contact))
-            contacts.add(contact);
+    public void AddContact(Card contact){
+        if(contact != null && !sharedCards.contains(contact))
+            sharedCards.add(contact);
     }
 
     //region Getter Setter
@@ -166,22 +142,6 @@ public class Account implements Serializable{
         this.password = password;
     }
 
-    public LocalDate getGebDat() {
-        return gebDat;
-    }
-
-    public void setGebDat(LocalDate gebDat) {
-        this.gebDat = gebDat;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -198,64 +158,24 @@ public class Account implements Serializable{
         this.lastName = lastName;
     }
 
-    public String getPhone1() {
-        return phone1;
+    public List<Card> getSharedCards() {
+        return sharedCards;
     }
 
-    public void setPhone1(String phone1) {
-        this.phone1 = phone1;
+    public void setSharedCards(List<Card> sharedCards) {
+        this.sharedCards = sharedCards;
     }
 
-    public String getPhone2() {
-        return phone2;
+    public List<Card> getMyCards() {
+        return myCards;
     }
 
-    public void setPhone2(String phone2) {
-        this.phone2 = phone2;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public List<Account> getContacts() {
-        return contacts;
+    public void setMyCards(List<Card> myCards) {
+        this.myCards = myCards;
     }
 
     public String getFullName() {
-        return firstName + " " + lastName+ ((title == null || title.equals("")) ? "" : " " + title);
-    }
-
-    public void setContacts(List<Account> contacts) {
-        this.contacts = contacts;
+        return firstName + " " + lastName;
     }
     //endregion
 }

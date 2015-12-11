@@ -1,4 +1,4 @@
-package at.htl.nfconnect.entities.Validators;
+package at.htl.nfconnect.entities.validators;
 
 /**
  * Created by Elias Salfinger on 19/11/15.
@@ -6,7 +6,6 @@ package at.htl.nfconnect.entities.Validators;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Random;
 
 public class HashUtil {
 

@@ -1,5 +1,6 @@
 package at.htl.nfconnect.business;
 import at.htl.nfconnect.entities.Account;
+import at.htl.nfconnect.entities.Card;
 
 import javax.ejb.Stateless;
 import javax.json.JsonObject;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @Stateless
 public class EndpointFacade {
-    @PersistenceContext
+    @PersistenceContext (name = "myPU")
     EntityManager em;
 
     public List<Account> getAccounts() {
@@ -82,11 +83,65 @@ public class EndpointFacade {
         }
     }
 
-    public Response update(JsonObject accountData) {
+    public Response updateCard(JsonObject accountData) {
+        System.out.println("Card Update attemted");
+        long id;
+        String email, firstName, lastName, phone1, phone2, street, houseNumber, zipCode, city, country, company, title;
+        LocalDate gebDat;
+
+        try {
+            id = Long.parseLong(accountData.getString("id"));
+            email = accountData.getString("email");
+            firstName = accountData.getString("firstName");
+            lastName = accountData.getString("lastName");
+            phone1 = accountData.getString("phone1");
+            phone2 = accountData.getString("phone2");
+            gebDat = LocalDate.parse(accountData.getString("gebDat"), DateTimeFormatter.BASIC_ISO_DATE);
+            street = accountData.getString("street");
+            houseNumber = accountData.getString("houseNumber");
+            city = accountData.getString("city");
+            zipCode = accountData.getString("zipCode");
+            country = accountData.getString("country");
+            company = accountData.getString("company");
+            title = accountData.getString("title");
+        } catch (NullPointerException e) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .header("cause", "Cant parse Json Object!")
+                    .build();
+        }
+
+        Card updateCard = em.createNamedQuery("findCardById", Card.class)
+                .setParameter("ID", id)
+                .getSingleResult();
+
+        updateCard.setEmail(email);
+        updateCard.setFirstName(firstName);
+        updateCard.setLastName(lastName);
+        updateCard.setPhone1(phone1);
+        updateCard.setPhone2(phone2);
+        updateCard.setGebDat(gebDat);
+        updateCard.setStreet(street);
+        updateCard.setHouseNumber(houseNumber);
+        updateCard.setCity(city);
+        updateCard.setZipCode(zipCode);
+        updateCard.setCountry(country);
+        updateCard.setCompany(company);
+        updateCard.setTitle(title);
+
+        try {
+            em.merge(updateCard);
+        } catch (TransactionRequiredException e) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .header("cause", "Could not merge card!").build();
+        }
+
+        return  Response.ok().entity(updateCard).build();
+    }
+
+    public Response updateAccount(JsonObject accountData) {
         System.out.println("Account Update attemted");
         long id;
-        String email, password, firstName, lastName, phone1, phone2, street, city, state, company, title;
-        LocalDate gebDat;
+        String email, password, firstName, lastName;
 
         try {
             id = Long.parseLong(accountData.getString("id"));
@@ -94,14 +149,6 @@ public class EndpointFacade {
             password = accountData.getString("password");
             firstName = accountData.getString("firstName");
             lastName = accountData.getString("lastName");
-            phone1 = accountData.getString("phone1");
-            phone2 = accountData.getString("phone2");
-            gebDat = LocalDate.parse(accountData.getString("gebDat"), DateTimeFormatter.BASIC_ISO_DATE);
-            street = accountData.getString("street");
-            city = accountData.getString("city");
-            state = accountData.getString("state");
-            company = accountData.getString("company");
-            title = accountData.getString("title");
         } catch (NullPointerException e) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .header("cause", "Cant parse Json Object!")
@@ -116,22 +163,52 @@ public class EndpointFacade {
         updateAccount.setPassword(password);
         updateAccount.setFirstName(firstName);
         updateAccount.setLastName(lastName);
-        updateAccount.setPhone1(phone1);
-        updateAccount.setPhone2(phone2);
-        updateAccount.setGebDat(gebDat);
-        updateAccount.setStreet(street);
-        updateAccount.setCity(city);
-        updateAccount.setState(state);
-        updateAccount.setCompany(company);
-        updateAccount.setTitle(title);
 
         try {
             em.merge(updateAccount);
         } catch (TransactionRequiredException e) {
             return Response.status(Response.Status.BAD_REQUEST)
-                    .header("cause", "Couldnt merge account!").build();
+                    .header("cause", "Couldnt merge Account!").build();
         }
 
         return  Response.ok().entity(updateAccount).build();
+    }
+
+    public Response lockCard(long cardId){
+        System.out.println("lock attempted");
+
+        Card card = em.createNamedQuery("findCardById", Card.class)
+                .setParameter("ID", cardId)
+                .getSingleResult();
+
+        card.setLocked(true);
+
+        try {
+            em.merge(card);
+        } catch (TransactionRequiredException e) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .header("cause", "Could not lock Card").build();
+        }
+
+        return Response.ok().entity(card).build();
+    }
+
+    public Response unlockCard(long cardId){
+        System.out.println("lock attempted");
+
+        Card card = em.createNamedQuery("findCardById", Card.class)
+                .setParameter("ID", cardId)
+                .getSingleResult();
+
+        card.setLocked(false);
+
+        try {
+            em.merge(card);
+        } catch (TransactionRequiredException e) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .header("cause", "Could not lock Card").build();
+        }
+
+        return Response.ok().entity(card).build();
     }
 }

@@ -40,10 +40,32 @@ public class RestEndpoint {
     }
 
     @POST
-    @Path("update")
+    @Path("updateCard")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response update(JsonObject accountData) {
-        return this.facade.update(accountData);
+    public Response updateCard(JsonObject accountData) {
+        return this.facade.updateCard(accountData);
+    }
+
+    @POST
+    @Path("updateAccount")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateAccount(JsonObject accountData) {
+        return this.facade.updateAccount(accountData);
+    }
+
+    @POST
+    @Path("lockCard/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response lockCard(@PathParam("id") long cardId) {
+        return this.facade.lockCard(cardId);
+    }
+
+    @POST
+    @Path("unlockCard/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response unlockCard(@PathParam("id") long cardId) {
+        return this.facade.unlockCard(cardId);
     }
 }
