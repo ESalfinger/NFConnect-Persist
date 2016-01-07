@@ -68,4 +68,13 @@ public class RestEndpoint {
     public Response unlockCard(@PathParam("id") long cardId) {
         return this.facade.unlockCard(cardId);
     }
+
+    @POST
+    @Path("share")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public  Response share(JsonObject cardData)
+    {
+        return this.facade.share(cardData);
+    }
 }

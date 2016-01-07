@@ -2,7 +2,6 @@ package at.htl.nfconnect.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -37,6 +36,7 @@ import java.time.LocalDate;
         )
 })
 public class Card implements Serializable{
+    //region Fields
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -86,6 +86,7 @@ public class Card implements Serializable{
     private String title;
     //---------------
     private boolean locked;
+    //endregion
 
     public Card() {
         this("", "");

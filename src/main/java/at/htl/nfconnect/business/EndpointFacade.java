@@ -1,6 +1,8 @@
 package at.htl.nfconnect.business;
 import at.htl.nfconnect.entities.Account;
 import at.htl.nfconnect.entities.Card;
+import at.htl.nfconnect.entities.Picture;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.ejb.Stateless;
 import javax.json.JsonObject;
@@ -142,6 +144,7 @@ public class EndpointFacade {
         System.out.println("Account Update attemted");
         long id;
         String email, password, firstName, lastName;
+        byte[] image;
 
         try {
             id = Long.parseLong(accountData.getString("id"));
@@ -149,6 +152,7 @@ public class EndpointFacade {
             password = accountData.getString("password");
             firstName = accountData.getString("firstName");
             lastName = accountData.getString("lastName");
+            image = accountData.getString("picture").getBytes();
         } catch (NullPointerException e) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .header("cause", "Cant parse Json Object!")
@@ -163,6 +167,7 @@ public class EndpointFacade {
         updateAccount.setPassword(password);
         updateAccount.setFirstName(firstName);
         updateAccount.setLastName(lastName);
+        updateAccount.setPicture(new Picture(image));
 
         try {
             em.merge(updateAccount);
@@ -210,5 +215,9 @@ public class EndpointFacade {
         }
 
         return Response.ok().entity(card).build();
+    }
+
+    public Response share(JsonObject cardData) {
+        throw new NotImplementedException();
     }
 }

@@ -48,6 +48,7 @@ import java.util.List;
         )
 })
 public class Account implements Serializable{
+    //region Fields
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -74,7 +75,7 @@ public class Account implements Serializable{
     @Size(max = 32, message = "LastName can only be 32 characters long!")
     private String lastName;
     //---------------
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name="ACCOUNT_SHAREDCARDS"
             , joinColumns={
@@ -86,7 +87,7 @@ public class Account implements Serializable{
     )
     private List<Card> sharedCards;
     //---------------
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name="ACCOUNT_MYCARDS"
             , joinColumns={
@@ -97,6 +98,11 @@ public class Account implements Serializable{
     }
     )
     private List<Card> myCards;
+    //---------------
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Picture picture;
+    //endregion
 
     public Account() {
         this("", "", "", "");
@@ -177,5 +183,14 @@ public class Account implements Serializable{
     public String getFullName() {
         return firstName + " " + lastName;
     }
+
+    public Picture getPicture() {
+        return picture;
+    }
+
+    public void setPicture(Picture picture) {
+        this.picture = picture;
+    }
+
     //endregion
 }
