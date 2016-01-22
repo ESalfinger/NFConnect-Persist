@@ -15,7 +15,6 @@ import java.util.List;
 
 @Entity
 @XmlRootElement
-//@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"email"}))
 @NamedQueries({
         @NamedQuery(
                 name = "findAllAccounts",
@@ -58,6 +57,7 @@ public class Account implements Serializable{
     @NotNull(message = "Email required!")
     @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
+    @Column(unique = true)
     private String email;
     //---------------
     @NotNull(message = "Password required!")
@@ -103,7 +103,6 @@ public class Account implements Serializable{
     @OneToOne(cascade = CascadeType.ALL)
     private Picture picture;
     //endregion
-
     public Account() {
         this("", "", "", "");
     }
@@ -116,6 +115,16 @@ public class Account implements Serializable{
         this.sharedCards = new LinkedList<Card>();
         this.myCards = new LinkedList<Card>();
         myCards.add(new Card(firstName, lastName));
+    }
+
+    public Account(String email, String password, String firstName, String lastName, String code) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.sharedCards = new LinkedList<Card>();
+        this.myCards = new LinkedList<Card>();
+        myCards.add(new Card(firstName, lastName, code));
     }
 
     public void AddContact(Card contact){

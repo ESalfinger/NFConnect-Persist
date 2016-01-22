@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: FlorianStuerzlinger
+  Date: 21/01/16
+  Time: 12:49
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps."></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <title>NFConnect</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes"></meta>
+    <link rel="icon" sizes="192x192" href="images/icons/webicon32.png"></link>
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes"></meta>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"></meta>
+    <meta name="apple-mobile-web-app-title" content="NFConnect"></meta>
+    <link rel="apple-touch-icon-precomposed" href="images/icons/webicon32.png"></link>
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png"></meta>
+    <meta name="msapplication-TileColor" content="#3372DF"></meta>
+
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en"
+          rel="stylesheet"></link>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="material.min.css"></link>
+    <link rel="stylesheet" href="styles.css"></link>
+    <style type="text/css">
+        #view-source {
+            position: fixed;
+            display: block;
+            right: 0;
+            bottom: 0;
+            margin-right: 40px;
+            margin-bottom: 40px;
+            z-index: 900;
+        }
+
+        .tablestyle {
+            width: 90%;
+            align-items: center;
+        }
+
+        #div-1 {
+            position: relative;
+        }
+
+        #div-1a {
+            position: relative;
+            top: 0;
+            right: 200px;
+            width: 500px;
+        }
+
+        #div-1b {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 500px;
+        }
+    </style>
+</h:head>
+
+<h:body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+        <!-- Basically is navbar ... -->
+        <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
+            <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+            </div>
+            <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+                <h1>NFConnect</h1>
+            </div>
+            <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+            </div>
+            <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
+                <a href="#overview" class="mdl-layout__tab is-active">Overview</a>
+                <a href="#viewall" class="mdl-layout__tab">My Contacts</a>
+                <a href="#youview" class="mdl-layout__tab">You</a>
+                <a href="#addcard" class="mdl-layout__tab">Add buisness card</a>
+                <a href="#faq" class="mdl-layout__tab">FAQ</a>
+            </div>
+        </header>
+        <main class="mdl-layout__content">
+
+            <!-- Div für die Daten von Overview-->
+            <div class="mdl-layout__tab-panel is-active" id="overview">
+                <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+                    <div class="mdl-card mdl-cell mdl-cell--12-col">
+                        <table>
+                            <tr>
+                                <td><img alt="test" src="images/me.jpg"  style="	width: 100px;
+                                                        height: 100px;
+                                                        border-radius: 150px;
+                                                        padding:30px;
+                                                        -webkit-border-radius: 150px;
+                                                        -moz-border-radius: 150px;">
+                                </img></td>
+                                <td><h3>Florian Stürzlinger</h3> AUSTRIA</td>
+                            </tr>
+                        </table>
+                    </div>
+                </section>
+                <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+
+                    <div class="mdl-card mdl-cell mdl-cell--12-col">
+                        <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
+                            <h4 class="mdl-cell mdl-cell--12-col">Recently Added:</h4>
+                            <!-- Images für profile einbinden -->
+                            <div class=" mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
+                                <div><img alt="test" src="images/Sample.png"  style="	width: 90px;
+                            height: 90px;
+                            border-radius: 150px;
+                            padding:10px;
+                            -webkit-border-radius: 150px;
+                            -moz-border-radius: 150px;">
+                                </img></div>
+                            </div>
+                            <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                                <h4>Alexander Elmecker</h4>
+                                Sample Text.
+                            </div>
+                            <!-- Images für profile einbinden -->
+                            <div class=" mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
+                                <div><img alt="test" src="images/Sample.png"  style="	width: 90px;
+                            height: 90px;
+                            border-radius: 150px;
+                            padding:10px;
+                            -webkit-border-radius: 150px;
+                            -moz-border-radius: 150px;">
+                                </img></div>
+                            </div>
+                            <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                                <h4>Julian Hörbst</h4>
+                                Sample Text.
+                            </div>
+                            <!-- Images für profile einbinden -->
+                            <div class=" mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
+                                <div><img alt="test" src="images/Sample.png"  style="	width: 90px;
+                            height: 90px;
+                            border-radius: 150px;
+                            padding:10px;
+                            -webkit-border-radius: 150px;
+                            -moz-border-radius: 150px;">
+                                </img></div>
+                            </div>
+                            <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                                <h4>Hannes Mitterhuber</h4>
+                                Sample Text.
+                            </div>
+                        </div>
+                        <div class="mdl-card__actions">
+                            <button class="mdl-button mdl-js-button mdl-button--primary">
+                                View more contacts...
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Klasse für die Daten von features -->
+            <div class="mdl-layout__tab-panel" id="viewall">
+                <section class="mdl-grid" style="padding-left: 150px; padding-top: 20px;">
+                    <table class="mdl-data-table mdl-js-data-table tablestyle">
+                        <thead>
+                        <tr>
+                            <th class="mdl-data-table__cell--non-numeric">Picture</th>
+                            <th class="mdl-data-table__cell--non-numeric">Name</th>
+                            <th class="mdl-data-table__cell--non-numeric">E-mail</th>
+                            <th class="mdl-data-table__cell--non-numeric">Number</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="mdl-data-table__cell--non-numeric"><img alt="test" src="images/Sample.png"  style="	width: 50px;
+                                                    height: 50px;
+                                                    border-radius: 150px;
+                                                    padding:1px;
+                                                    -webkit-border-radius: 150px;
+                                                    -moz-border-radius: 150px;">
+                            </img></td>
+                            <td class="mdl-data-table__cell--non-numeric">Elias Salfinger</td>
+                            <td class="mdl-data-table__cell--non-numeric">eliassalfinger@gmail.com</td>
+                            <td class="mdl-data-table__cell--non-numeric">6969696969696</td>
+                        </tr>
+                        <tr>
+                            <td class="mdl-data-table__cell--non-numeric"><img alt="test" src="images/Sample.png"  style="	width: 50px;
+                                                    height: 50px;
+                                                    border-radius: 150px;
+                                                    padding:1px;
+                                                    -webkit-border-radius: 150px;
+                                                    -moz-border-radius: 150px;">
+                            </img></td>
+                            <td class="mdl-data-table__cell--non-numeric">Alexander Elmecker</td>
+                            <td class="mdl-data-table__cell--non-numeric">elli@gmail.com</td>
+                            <td class="mdl-data-table__cell--non-numeric">90093020923090</td>
+                        </tr>
+                        <tr>
+                            <td class="mdl-data-table__cell--non-numeric"><img alt="test" src="images/Sample.png"  style="	width: 50px;
+                                                    height: 50px;
+                                                    border-radius: 150px;
+                                                    padding:1px;
+                                                    -webkit-border-radius: 150px;
+                                                    -moz-border-radius: 150px;">
+                            </img></td>
+                            <td class="mdl-data-table__cell--non-numeric">Hannes Mitterhuber</td>
+                            <td class="mdl-data-table__cell--non-numeric">mihu@gmx.at</td>
+                            <td class="mdl-data-table__cell--non-numeric">90093020923090</td>
+                        </tr>
+                        <tr>
+                            <td class="mdl-data-table__cell--non-numeric"><img alt="test" src="images/Sample.png"  style="	width: 50px;
+                                                    height: 50px;
+                                                    border-radius: 150px;
+                                                    padding:1px;
+                                                    -webkit-border-radius: 150px;
+                                                    -moz-border-radius: 150px;">
+                            </img></td>
+                            <td class="mdl-data-table__cell--non-numeric">Julian Hörbst</td>
+                            <td class="mdl-data-table__cell--non-numeric">fgt@email.com</td>
+                            <td class="mdl-data-table__cell--non-numeric">90093020923090</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+
+
+            <!-- Klasse für die Daten von You -->
+            <div class="mdl-layout__tab-panel" id="youview">
+                <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+                    <div class="mdl-card mdl-cell mdl-cell--12-col">
+                        <table>
+                            <tr>
+                                <td><img alt="test" src="images/me.jpg"  style="	width: 100px;
+                                                        height: 100px;
+                                                        border-radius: 150px;
+                                                        padding:30px;
+                                                        -webkit-border-radius: 150px;
+                                                        -moz-border-radius: 150px;">
+                                </img></td>
+                                <td id="n_name_country"><h3>Florian Stürzlinger</h3> AUSTRIA</td>
+                                <td id="e_name_country" style="display: none;">
+                                    <form action="#">
+                                        <div class="mdl-textfield mdl-js-textfield">
+                                            <input class="mdl-textfield__input" type="text" id="f_name"></input>
+                                            <label class="mdl-textfield__label" for="sample1">Florian Stürzlinger</label>
+                                        </div>
+                                    </form>
+                                    <form action="#">
+                                        <div class="mdl-textfield mdl-js-textfield">
+                                            <input class="mdl-textfield__input" type="text" id="f_country"></input>
+                                            <label class="mdl-textfield__label" for="sample1">AUSTRIA</label>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td id="n_button" style="padding-left:330px;"><button onclick="onEditButtonClick()" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                                    <img alt="test" src="images/icons/pencilminiW.png"></img>
+                                </button></td>
+                            </tr>
+                        </table>
+                        <table style="padding: 50px;">
+                            <tr>
+                                <td><img alt="test" src="images/icons/email-outline.png"></img></td>
+                                <td id="n_email" style="padding-left:100px;">stueflo@gmail.com</td>
+                                <td id="e_email" style="padding-left:100px; display:none;">
+                                    <form action="#">
+                                        <div class="mdl-textfield mdl-js-textfield">
+                                            <input class="mdl-textfield__input" type="text" id="f_email"></input>
+                                            <label class="mdl-textfield__label" for="f_email">stueflo@gmail.com</label>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><img alt="test" src="images/icons/phone.png"></img></td>
+                                <td id="n_number1" style="padding-left:100px;">0660 4944357</td>
+                                <td id="e_number1" style="padding-left:100px; display:none;">
+                                    <form action="#">
+                                        <div class="mdl-textfield mdl-js-textfield">
+                                            <input class="mdl-textfield__input" type="text" id="f_number1"></input>
+                                            <label class="mdl-textfield__label" for="f_number1">0660 4944357</label>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td id="n_number2" style="padding-left:100px;">07247 6256</td>
+                                <td id="e_number2" style="padding-left:50px; display:none;">
+                                    <form action="#">
+                                        <div class="mdl-textfield mdl-js-textfield">
+                                            <input class="mdl-textfield__input" type="text" id="f_number2"></input>
+                                            <label class="mdl-textfield__label" for="f_number2">07247 6256</label>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><img alt="test" src="images/icons/home.png"></img></td>
+                                <td id="n_street" style="padding-left:100px;">Moos 17</td>
+                                <td id="e_street" style="padding-left:100px; display:none;">
+                                    <form action="#">
+                                        <div class="mdl-textfield mdl-js-textfield">
+                                            <input class="mdl-textfield__input" type="text" id="f_street"></input>
+                                            <label class="mdl-textfield__label" for="f_street">Moos</label>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td id="e_number" style="padding-left:50px; display:none;">
+                                    <form action="#">
+                                        <div class="mdl-textfield mdl-js-textfield">
+                                            <input class="mdl-textfield__input" type="text" id="f_number"></input>
+                                            <label class="mdl-textfield__label" for="f_number">17</label>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td id="n_city" style="padding-left:100px;"> 4625 Offenhausen</td>
+                                <td id="e_postalcode" style="padding-left:100px; display:none;">
+                                    <form action="#">
+                                        <div class="mdl-textfield mdl-js-textfield">
+                                            <input class="mdl-textfield__input" type="text" id="f_postalcode"></input>
+                                            <label class="mdl-textfield__label" for="f_postalcode">4625 </label>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td id="e_city" style="padding-left:50px; display:none;">
+                                    <form action="#">
+                                        <div class="mdl-textfield mdl-js-textfield">
+                                            <input class="mdl-textfield__input" type="text" id="f_city"></input>
+                                            <label class="mdl-textfield__label" for="f_city">Offenhausen</label>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
+                        <button id="e_changePassword"  style="display:none;" class="mdl-button mdl-js-button  mdl-button--primary">
+                            change Password
+                        </button>
+                    </div>
+                    <table id="e_table" style="padding:20px; display:none;">
+                        <tr>
+                            <td style="padding-left:230px;"><button onclick="onFinished()" id="e_saveChanges"  style="display:none;" class="mdl-button mdl-js-button  mdl-button--primary">
+                                Save changes
+                            </button></td>
+                            <td style="padding-left:100px;"><button onclick="onFinished()" id="e_undoChanges"  style="display:none;" class="mdl-button mdl-js-button  mdl-button--primary">
+                                Undo changes
+                            </button></td>
+                        </tr>
+                    </table>
+                </section>
+            </div>
+
+
+            <!-- add Buisness card -->
+            <div class="mdl-layout__tab-panel" id="addcard">
+                <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+                    <div style="align:center;" class="mdl-card mdl-cell mdl-cell--12-col">
+                        <div style=" text-align:center;"><h3>Add a buisness card</h3></div>
+
+                        <!-- Simple Textfield -->
+                        <form action="#" style="padding-left: 280px;">
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" id="sample1"></input>
+                                <label class="mdl-textfield__label" for="sample1">enter card number</label>
+                            </div>
+                        </form>
+
+                        <button class="mdl-button mdl-js-button  mdl-button--primary">
+                            add card
+                        </button>
+
+                    </div>
+                </section>
+            </div>
+
+            <!-- add Buisness card -->
+            <div class="mdl-layout__tab-panel" id="faq">
+                <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+                    <div style="align:center;" class="mdl-card mdl-cell mdl-cell--12-col">
+                        <div style=" text-align:center;"><h3>test</h3></div>
+
+
+                    </div>
+                </section>
+            </div>
+
+            <footer class="mdl-mega-footer">
+                <div class="mdl-mega-footer--middle-section">
+                    <div class="mdl-mega-footer--drop-down-section">
+                        <input class="mdl-mega-footer--heading-checkbox" type="checkbox"></input>
+                        <h1 class="mdl-mega-footer--heading">Features</h1>
+                        <ul class="mdl-mega-footer--link-list">
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Terms</a></li>
+                            <li><a href="#">Partners</a></li>
+                            <li><a href="#">Updates</a></li>
+                        </ul>
+                    </div>
+                    <div class="mdl-mega-footer--drop-down-section">
+                        <input class="mdl-mega-footer--heading-checkbox" type="checkbox"></input>
+                        <h1 class="mdl-mega-footer--heading">Details</h1>
+                        <ul class="mdl-mega-footer--link-list">
+                            <li><a href="#">Spec</a></li>
+                            <li><a href="#">Tools</a></li>
+                            <li><a href="#">Resources</a></li>
+                        </ul>
+                    </div>
+                    <div class="mdl-mega-footer--drop-down-section">
+                        <input class="mdl-mega-footer--heading-checkbox" type="checkbox"></input>
+                        <h1 class="mdl-mega-footer--heading">Technology</h1>
+                        <ul class="mdl-mega-footer--link-list">
+                            <li><a href="#">How it works</a></li>
+                            <li><a href="#">Patterns</a></li>
+                            <li><a href="#">Usage</a></li>
+                            <li><a href="#">Products</a></li>
+                            <li><a href="#">Contracts</a></li>
+                        </ul>
+                    </div>
+                    <div class="mdl-mega-footer--drop-down-section">
+                        <input class="mdl-mega-footer--heading-checkbox" type="checkbox"></input>
+                        <h1 class="mdl-mega-footer--heading">FAQ</h1>
+                        <ul class="mdl-mega-footer--link-list">
+                            <li><a href="#">Questions</a></li>
+                            <li><a href="#">Answers</a></li>
+                            <li><a href="#">Contact us</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mdl-mega-footer--bottom-section">
+                    <div class="mdl-logo">
+                        More Information
+                    </div>
+                    <ul class="mdl-mega-footer--link-list">
+                        <li><a href="https://developers.google.com/web/starter-kit/">Web Starter Kit</a></li>
+                        <li><a href="#">Help</a></li>
+                        <li><a href="#">Privacy and Terms</a></li>
+                    </ul>
+                </div>
+            </footer>
+        </main>
+    </div>
+    <script type="text/javascript" src="js/material.min.js"></script>
+        <script type="text/javascript">
+        function onEditButtonClick() {
+            $('[id^=n_]').each(function() {
+                this.style.display = 'none';
+            });
+
+            $('[id^=e_]').each(function() {
+                this.style.display = '';
+            });
+        }
+        function onFinished() {
+            $('[id^=n_]').each(function() {
+                this.style.display = '';
+            });
+
+            $('[id^=e_]').each(function() {
+                this.style.display = 'none';
+            });
+        }
+        </script>
+</h:body>
+
+</html>

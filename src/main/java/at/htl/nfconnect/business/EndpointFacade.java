@@ -54,6 +54,24 @@ public class EndpointFacade {
         }
     }
 
+    public boolean logInWeb(String email, String password) {
+        System.out.println("log in attempted");
+
+        Account requestedAccount;
+        try {
+            requestedAccount = em.createNamedQuery("findAccountByEmail", Account.class)
+                    .setParameter("EMAIL", email)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return false;
+        }
+        if(requestedAccount.getPassword().equals(password)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public Response register(JsonObject accountData) {
         System.out.printf("registration attemted");
         String email, password, firstName, lastName;
@@ -81,6 +99,27 @@ public class EndpointFacade {
             } catch (TransactionRequiredException ex) {
                 return Response.status(Response.Status.BAD_REQUEST)
                         .header("cause", "Couldnt persist account!").build();
+            }
+        }
+    }
+
+    public boolean registerWeb(String email, String password, String firstName, String lastName) {
+        System.out.printf("registration attemted");
+
+
+
+        try {
+            em.createNamedQuery("findAccountByEmail", Account.class)
+                    .setParameter("EMAIL", email)
+                    .getSingleResult();
+            return false;
+        } catch (NoResultException e) {
+            Account registerAccount = new Account(email, password, firstName, lastName);
+            try {
+                em.persist(registerAccount);
+                return true;
+            } catch (TransactionRequiredException ex) {
+                return false;
             }
         }
     }
@@ -217,7 +256,17 @@ public class EndpointFacade {
         return Response.ok().entity(card).build();
     }
 
-    public Response share(JsonObject cardData) {
-        throw new NotImplementedException();
+    public Response share(String cardCode, long recieverId) {
+        Account reciever = em.createNamedQuery("findAccountById", Account.class)
+                .setParameter("ID", recieverId)
+                .getSingleResult();
+
+        Card senderCard = em.createNamedQuery("findCardByCode", Card.class)
+                .setParameter("CODE", cardCode)
+                .getSingleResult();
+
+        reciever.getSharedCards().add(senderCard);
+
+        return Response.ok().entity(senderCard).build();
     }
 }

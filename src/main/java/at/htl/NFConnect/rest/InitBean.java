@@ -2,6 +2,7 @@ package at.htl.nfconnect.rest;
 
 import at.htl.nfconnect.entities.Account;
 import at.htl.nfconnect.entities.Card;
+import at.htl.nfconnect.entities.validators.HashUtil;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
@@ -24,9 +25,9 @@ public class InitBean {
 
     @PostConstruct
     public void init() {
-        Account account = new Account("test@mail.com", "passme", "Elias", "Salfinger");
+        Account account = new Account("test@mail.com", HashUtil.hash("passme"), "Elias", "Salfinger", "testcode1");
         account.getMyCards().get(0).setEmail("nicememe@mail.com");
-        Card card = new Card("Julian", "Hoerbst");
+        Card card = new Card("Julian", "Hoerbst", "testcode2");
         card.setEmail("fag@mail.com");
         account.AddContact(card);
         em.persist(account);

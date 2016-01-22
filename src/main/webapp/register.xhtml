@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>NFConnect</title>
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></link>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"
+            type="application/javascript"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
+            type="application/javascript"></script>
+
+    <style type="text/css">
+        .jumbotron {
+            background-color: #FF9900;
+            color: #fff;
+        }
+
+        body {
+            font: 400 15px Lato, sans-serif;
+            line-height: 1.8;
+            color: #818181;
+        }
+
+        a {
+            font-size: 24px;
+        }
+
+        h2 {
+            font-size: 24px;
+            text-transform: uppercase;
+            color: #303030;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        h4 {
+            font-size: 19px;
+            line-height: 1.375em;
+            color: #303030;
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+
+        .container-fluid {
+            padding: 60px 50px;
+        }
+
+        .bg-grey {
+            background-color: #f6f6f6;
+        }
+
+        .logo {
+            color: #E68A00;
+            font-size: 200px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .col-sm-4 {
+                text-align: center;
+                margin: 25px 0;
+            }
+        }
+
+
+    </style>
+</h:head>
+<h:body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+    <h:form id="pageForm">
+        <div class="jumbotron text-center">
+            <h1>How to get started.</h1>
+            <p>1. You need a phone with Near-Field-Communication</p>
+
+        </div>
+
+
+        <div class="container-fluid" align="center">
+
+            <div class="row">
+                <h1>2. Create your NFConnect account!</h1>
+                <h4>pssst You need an E-Mail :)</h4>
+                <p align="center">Name</p>
+                <p:inputText id="name" value="#{registerController.name}"></p:inputText>
+
+                <p align="center">Lastname</p>
+                <p:inputText id="lastname" value="#{registerController.lastname}"></p:inputText>
+
+                <p align="center">E-Mail</p>
+                <p:inputText id="mail" value="#{registerController.email}"></p:inputText>
+
+                <p align="center">Password</p>
+                <p:inputText id="password" type="password" value="#{registerController.password}"></p:inputText>
+
+                <p align="center">Confirm password</p>
+                <p:inputText id="confirmpassword" type="password"
+                             value="#{registerController.confirmPassword}"></p:inputText>
+
+                <br></br>
+                <br></br>
+
+                <p:commandButton value="Register" ajax="true"
+                                 action="#{registerController.performRegister}"/>
+            </div>
+        </div>
+
+        <div class="container-fluid bg-grey">
+            <div class="row">
+                <h1 align="center"> Congratulations you Finished!</h1>
+                <p align="center"><h:link value="Return to the mainpage!" outcome="/index.xhtml"/></p>
+            </div>
+
+        </div>
+
+
+        <script src="bootstrap/js/bootstrap.min.js" type="application/javascript"></script>
+    </h:form>
+</h:body>
+</html>

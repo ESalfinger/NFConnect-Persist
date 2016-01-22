@@ -1,2 +1,0 @@
-# NFConnect
-SYP Project

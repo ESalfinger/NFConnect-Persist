@@ -73,8 +73,8 @@ public class RestEndpoint {
     @Path("share")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public  Response share(JsonObject cardData)
+    public  Response share(String cardCode, long recieverId)
     {
-        return this.facade.share(cardData);
+        return this.facade.share(cardCode, recieverId);
     }
 }

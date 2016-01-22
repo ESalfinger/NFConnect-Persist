@@ -13,7 +13,6 @@ import java.time.LocalDate;
  */
 @Entity
 @XmlRootElement
-//@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"email"}))
 @NamedQueries({
         @NamedQuery(
                 name = "findAllCards",
@@ -33,6 +32,11 @@ import java.time.LocalDate;
                 name = "findCardByFullName",
                 query = "select c from Card c " +
                         "where c.firstName = :FIRSTNAME and c.lastName = :LASTNAME"
+        ),
+        @NamedQuery(
+                name = "findCardByCode",
+                query = "select c from Card c " +
+                        "where c.code = :CODE"
         )
 })
 public class Card implements Serializable{
@@ -46,6 +50,7 @@ public class Card implements Serializable{
     @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
             message = "Email invalid!")
+    @Column(unique = true)
     private String email;
     //---------------
     @NotNull(message = "FirstName required!")
@@ -86,16 +91,24 @@ public class Card implements Serializable{
     private String title;
     //---------------
     private boolean locked;
+    //---------------
+    @Column(unique = true)
+    private String code;
     //endregion
 
     public Card() {
         this("", "");
     }
 
-    public Card(String firstName, String lastName) {
+    public Card(String firstName, String lastName, String code) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.code = code;
         this.locked = false;
+    }
+
+    public Card(String firstName, String lastName) {
+        this(firstName, lastName, "");
     }
 
     //region Getter and Setter
@@ -218,5 +231,14 @@ public class Card implements Serializable{
     public String getFullName() {
         return firstName + " " + lastName+ ((title == null || title.equals("")) ? "" : " " + title);
     }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     //endregion
 }
