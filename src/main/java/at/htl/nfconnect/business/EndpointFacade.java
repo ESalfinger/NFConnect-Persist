@@ -3,6 +3,7 @@ import at.htl.nfconnect.entities.Account;
 import at.htl.nfconnect.entities.Card;
 import at.htl.nfconnect.entities.Picture;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import sun.reflect.generics.tree.LongSignature;
 
 import javax.ejb.Stateless;
 import javax.json.JsonObject;
@@ -13,6 +14,7 @@ import javax.persistence.TransactionRequiredException;
 import javax.ws.rs.core.Response;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.LinkedList;
 import java.util.List;
 
 @Stateless
@@ -21,7 +23,7 @@ public class EndpointFacade {
     EntityManager em;
 
     public List<Account> getAccounts() {
-        return em.createNamedQuery("findAll", Account.class)
+        return em.createNamedQuery("findAllAccounts", Account.class)
                 .getResultList();
     }
 

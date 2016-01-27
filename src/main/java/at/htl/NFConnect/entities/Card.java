@@ -4,9 +4,11 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import javax.ws.rs.DefaultValue;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Created by Elias Salfinger on 10/12/15.
@@ -50,7 +52,6 @@ public class Card implements Serializable{
     @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
             message = "Email invalid!")
-    @Column(unique = true)
     private String email;
     //---------------
     @NotNull(message = "FirstName required!")
@@ -90,25 +91,27 @@ public class Card implements Serializable{
     //---------------
     private String title;
     //---------------
+    @DefaultValue(value = "false")
     private boolean locked;
     //---------------
-    @Column(unique = true)
-    private String code;
+    @OneToOne (cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "CODE")
+    private Code code;
     //endregion
 
     public Card() {
         this("", "");
     }
 
-    public Card(String firstName, String lastName, String code) {
+    public Card(String firstName, String lastName, Code code) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.code = code;
-        this.locked = false;
     }
 
     public Card(String firstName, String lastName) {
-        this(firstName, lastName, "");
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     //region Getter and Setter
@@ -232,13 +235,12 @@ public class Card implements Serializable{
         return firstName + " " + lastName+ ((title == null || title.equals("")) ? "" : " " + title);
     }
 
-    public String getCode() {
+    public Code getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(Code code) {
         this.code = code;
     }
-
     //endregion
 }

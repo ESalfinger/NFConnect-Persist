@@ -117,13 +117,15 @@ public class Account implements Serializable{
         myCards.add(new Card(firstName, lastName));
     }
 
-    public Account(String email, String password, String firstName, String lastName, String code) {
+    public Account(String email, String password, String firstName, String lastName, String codeValue) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.sharedCards = new LinkedList<Card>();
         this.myCards = new LinkedList<Card>();
+        Code code = new Code(codeValue);
+
         myCards.add(new Card(firstName, lastName, code));
     }
 
